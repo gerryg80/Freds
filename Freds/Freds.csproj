@@ -200,6 +200,9 @@
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\akssandbox22580062.pubxml" />
+    <None Include="Properties\PublishProfiles\akssandbox77803059.pubxml" />
+    <None Include="Properties\PublishProfiles\akssandbox89056507.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
