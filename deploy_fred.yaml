@@ -1,22 +1,34 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: freds-disk
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: default
+  resources:
+    requests:
+      storage: 5Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample
+  name: freds
   labels:
-    app: sample
+    app: freds
 spec:
   replicas: 1
   template:
     metadata:
-      name: sample
+      name: freds
       labels:
-        app: sample
+        app: freds
     spec:
       nodeSelector:
         "beta.kubernetes.io/os": windows
       containers:
-      - name: sample
-        image: akssandbox89056507.azurecr.io/freds:latest
+      - name: freds
+        image: akssandbox64150903.azurecr.io/freds:latest
         resources:
           limits:
             cpu: 1
@@ -26,9 +38,16 @@ spec:
             memory: 300M
         ports:
           - containerPort: 80
+        volumeMounts:
+        - mountPath: "c:\\InetPub\\freds"
+          name: volume
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: freds-disk
   selector:
     matchLabels:
-      app: sample
+      app: freds
 ---
 apiVersion: v1
 kind: Service
